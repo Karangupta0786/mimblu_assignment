@@ -47,18 +47,23 @@ class PlusPlansFragment : Fragment() {
         plusPlans.enqueue(object : Callback<PlusPlans?> {
             override fun onResponse(call: Call<PlusPlans?>, response: Response<PlusPlans?>) {
 
-                Toast.makeText(requireContext(), response.code().toString(), Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    Toast.makeText(requireContext(), response.code().toString(), Toast.LENGTH_SHORT)
+                        .show()
 
-                if (response.isSuccessful){
-                    Log.d("plans", response.body()!!.list.toString())
-                    val plansAdapter = PlansAdapter(response.body()!!.list, requireContext())
-                    recycler.adapter = plansAdapter
-                    plansAdapter.notifyDataSetChanged()
+                    if (response.isSuccessful) {
+                        Log.d("plans", response.body()!!.list.toString())
+                        val plansAdapter = PlansAdapter(response.body()!!.list, requireContext())
+                        recycler.adapter = plansAdapter
+                        plansAdapter.notifyDataSetChanged()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<PlusPlans?>, t: Throwable) {
-                Toast.makeText(requireContext(), t.localizedMessage, Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    Toast.makeText(requireContext(), t.localizedMessage, Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
