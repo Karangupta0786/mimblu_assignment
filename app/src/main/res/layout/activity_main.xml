@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Help us to find you the best selection of counsellers to choose from"
+            android:text="Help us to find you the best selection of counsellors to choose from"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
